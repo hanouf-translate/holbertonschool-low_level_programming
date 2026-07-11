@@ -1,5 +1,4 @@
 #include "main.h"
-
 /**
  * print_square - Prints a square using the '#' character, followed by a newline
  * @size: The width and height size of the square matrix
