@@ -29,6 +29,9 @@ int main(void)
 		/* code goes here*/}
 	else if (choice == 0){
 		isend = false;}
+	 else {
+		printf("Invalid choice"); 
+	 }
 
 
 		
