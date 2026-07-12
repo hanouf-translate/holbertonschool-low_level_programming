@@ -5,6 +5,8 @@ int main(void)
 {
 	bool isend = true;
 	int choice;
+	int a;
+	int b;
 	printf("welcome\n");
 	
 	while(isend){
@@ -19,6 +21,14 @@ int main(void)
 
 	 if (choice ==1){
 		 /* code goes here*/
+		 printf("choice: %d\n", choice);
+		 printf("Enter Value A:");
+		 scanf("%d",&a);
+		 printf("Enter Value B: ");
+		 scanf("%d",&b);
+		 printf("A:  %d\n",a); 
+		 printf("B: %d\n",b);
+		 printf("Result: %d\n", a + b); 
 	 }
 	 else if (choice ==2) {
 		 /* code goes here*/}
