@@ -30,31 +30,38 @@ int main(void)
 		 printf("B: %d\n",b);
 		 printf("Result: %d\n", a + b); 
 	 }
-	 else if (choice ==2) {
+	 if (choice ==2) {
 		 /* code goes here*/
 		 printf("choice: %d\nEnter Value A and B: ", choice);
                  scanf("%d %d", &a, &b);
                  printf("A:  %d\nB: %d\nResult: %d\n", a, b, a - b);
 	 }
 
-	 else if (choice == 3) {
+	 if (choice == 3) {
 		 /* code goes here*/
             printf("choice: %d\nEnter Value A and B: ", choice);
             scanf("%d %d", &a, &b);
              printf("A:  %d\nB: %d\nResult: %d\n", a, b, a * b);
 	 }
-	else if (choice == 4){
-		/* code goes here*/}
-	else if (choice == 0){
+	 if (choice == 4){
+		/* code goes here*/
+		printf("choice: %d\nEnter Value A and B: ", choice);
+		scanf("%d %d", &a, &b);
+		if (b == 0) {
+                  printf("Error: division by zero");}
+		else {
+	           printf("A: %d\nB: %d\nResult: %d\n", a, b, a/b);
+	       	}
+		}
+		 
+	}
+	 if (choice == 0){
 		isend = false;}
 	 else {
 		printf("Invalid choice"); 
 	 }
-
+        printf("Bye!");
+        return 0;
 
 		
-	}
-	printf("Bye!");
-	return 0;
-
 	}
