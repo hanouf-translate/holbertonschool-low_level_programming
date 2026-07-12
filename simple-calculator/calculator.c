@@ -31,7 +31,11 @@ int main(void)
 		 printf("Result: %d\n", a + b); 
 	 }
 	 else if (choice ==2) {
-		 /* code goes here*/}
+		 /* code goes here*/
+		 printf("choice: %d\nEnter Value A and B: ", choice);
+                 scanf("%d %d", &a, &b);
+                 printf("A:  %d\nB: %d\nResult: %d\n", a, b, a - b);
+	 }
 
 	 else if (choice == 3) {
 		 /* code goes here*/}
