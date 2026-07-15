@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * puts_half - Prints the second half of a string, followed by a new line
- * @str: The pointer to the string
- *
- * Return: void
- */
+ * puts_half - Prints the second half of a string, followed by a new line
+ * @str: The pointer to the string
+ *
+ * Return: void
+ */
 void puts_half(char *str)
 {
 	int len = 0;
@@ -15,7 +15,6 @@ void puts_half(char *str)
 	{
 		len++;
 	}
-
 
 	for (i = (len + 1) / 2; i < len; i++)
 	{
