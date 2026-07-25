@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * array_range - Creates an array of integers containing values from min to max.
+ * array_range - Creates an array of integers.
  * @min: The minimum (starting) value, included.
  * @max: The maximum (ending) value, included.
  *
