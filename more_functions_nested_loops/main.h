@@ -15,5 +15,6 @@ void print_diagonal(int n);
 void print_square(int size);
 void print_triangle(int size);
 void *malloc_checked(unsigned int b);
+char *string_nconcat(char *s1, char *s2, unsigned int n);
 
 #endif /* MAIN_H */
