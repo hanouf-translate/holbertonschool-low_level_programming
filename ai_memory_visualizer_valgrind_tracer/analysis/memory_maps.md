@@ -1,4 +1,3 @@
-Here is the step-by-step memory breakdown for each program execution output, categorized by memory region, pointer relationships, and lifetimes.
 
 ---
 
@@ -99,3 +98,5 @@ Here is the step-by-step memory breakdown for each program execution output, cat
 
 * **Automatic Storage Duration:** Local variables (`local_int`, `local_buf`, `marker`) are allocated on function entry (`[enter]`) and destroyed automatically on return (`[exit]`).
 * As functions pop off the call stack (`depth=3` $\rightarrow$ `depth=0`), memory addresses are reclaimed by shrinking the stack pointer back up toward `0x7ffcd80d6684`.
+
+-note: model used GIMINI
