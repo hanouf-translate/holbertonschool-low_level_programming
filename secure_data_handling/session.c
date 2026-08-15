@@ -2,109 +2,79 @@
 #include <string.h>
 #include "session.h"
 
-/**
- * session_create - Creates a new secure session instance.
- * @id: Unique identifier string for the session.
- * @data: Pointer to raw session data buffer.
- * @data_len: Length of session data in bytes.
- *
- * Return: Pointer to created session_t, or NULL on failure.
- */
-session_t *session_create(const char *id, const void *data, size_t data_len)
+session_t *session_create(const char *id, unsigned int uid, const unsigned char *data, size_t data_len)
 {
-	session_t *session;
+	session_t *s;
 
-	if (id == NULL)
+	if (!id)
 		return (NULL);
 
-	session = malloc(sizeof(session_t));
-	if (session == NULL)
+	s = malloc(sizeof(*s));
+	if (!s)
 		return (NULL);
 
-	session->id = strdup(id);
-	if (session->id == NULL)
+	s->id = strdup(id);
+	if (!s->id)
 	{
-		free(session);
+		free(s);
 		return (NULL);
 	}
 
-	session->data = NULL;
-	session->data_len = 0;
+	s->uid = uid;
 
-	if (data != NULL && data_len > 0)
+	if (data && data_len > 0)
 	{
-		if (session_update_data(session, data, data_len) == 0)
+		s->data = malloc(data_len);
+		if (!s->data)
 		{
-			free(session->id);
-			free(session);
+			free(s->id);
+			free(s);
 			return (NULL);
 		}
+		memcpy(s->data, data, data_len);
+		s->data_len = data_len;
+	}
+	else
+	{
+		s->data = NULL;
+		s->data_len = 0;
 	}
 
-	return (session);
+	return (s);
 }
 
-/**
- * session_clear_data - Securely zeroes and frees session payload data.
- * @session: Pointer to the session instance.
- */
-void session_clear_data(session_t *session)
+int session_set_data(session_t *s, const unsigned char *data, size_t data_len)
 {
-	if (session == NULL || session->data == NULL)
-		return;
+	unsigned char *tmp;
 
-	memset(session->data, 0, session->data_len);
-	free(session->data);
-	session->data = NULL;
-	session->data_len = 0;
-}
-
-/**
- * session_update_data - Updates payload data without leaking or corrupting memory.
- * @session: Pointer to session instance.
- * @data: Pointer to new data buffer.
- * @data_len: Length of new data buffer in bytes.
- *
- * Return: 1 on success, 0 on failure.
- */
-int session_update_data(session_t *session, const void *data, size_t data_len)
-{
-	void *new_data;
-
-	if (session == NULL)
+	if (!s)
 		return (0);
 
-	if (data == NULL || data_len == 0)
+	if (!data || data_len == 0)
 	{
-		session_clear_data(session);
+		free(s->data);
+		s->data = NULL;
+		s->data_len = 0;
 		return (1);
 	}
 
-	new_data = malloc(data_len);
-	if (new_data == NULL)
+	tmp = realloc(s->data, data_len);
+	if (!tmp)
 		return (0);
 
-	memcpy(new_data, data, data_len);
-	session_clear_data(session);
-
-	session->data = new_data;
-	session->data_len = data_len;
+	s->data = tmp;
+	memcpy(s->data, data, data_len);
+	s->data_len = data_len;
 
 	return (1);
 }
 
-/**
- * session_destroy - Destroys session, zeroing sensitive payload and freeing memory.
- * @session: Pointer to session instance to free.
- */
-void session_destroy(session_t *session)
+void session_destroy(session_t *s)
 {
-	if (session == NULL)
+	if (!s)
 		return;
 
-	session_clear_data(session);
-	if (session->id != NULL)
-		free(session->id);
-
-	free(session);
+	free(s->id);
+	free(s->data);
+	free(s);
 }
