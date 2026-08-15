@@ -3,9 +3,9 @@
 #include "store.h"
 
 /**
- * store_create - Allocates and initializes a session store.
+ * store_create - Allocates and initializes a new session store instance.
  *
- * Return: Pointer to initialized store_t, or NULL on failure.
+ * Return: Pointer to initialized store_t, or NULL on allocation failure.
  */
 store_t *store_create(void)
 {
@@ -22,7 +22,7 @@ store_t *store_create(void)
 }
 
 /**
- * store_find - Searches for a session by ID in the store.
+ * store_find - Searches for a session by ID string in the store.
  * @store: Pointer to store instance.
  * @id: Target session ID string.
  *
@@ -50,9 +50,9 @@ session_t *store_find(const store_t *store, const char *id)
 }
 
 /**
- * store_insert - Inserts session into store, ensuring no duplicate IDs.
+ * store_insert - Inserts session into store, rejecting duplicate session IDs.
  * @store: Pointer to store instance.
- * @session: Pointer to session instance to store.
+ * @session: Pointer to session instance to insert.
  *
  * Return: 1 on success, 0 on failure or duplicate ID.
  */
@@ -79,7 +79,7 @@ int store_insert(store_t *store, session_t *session)
 }
 
 /**
- * store_delete - Removes session by ID and frees associated node memory.
+ * store_delete - Removes session by ID and frees associated node and session memory.
  * @store: Pointer to store instance.
  * @id: Target session ID string to delete.
  *
@@ -140,7 +140,7 @@ void store_clear(store_t *store)
 }
 
 /**
- * store_destroy - Clears and frees entire store instance.
+ * store_destroy - Clears all store nodes and frees the store instance itself.
  * @store: Pointer to store instance.
  */
 void store_destroy(store_t *store)

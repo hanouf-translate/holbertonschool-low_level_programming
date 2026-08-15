@@ -45,7 +45,7 @@ session_t *session_create(const char *id, const void *data, size_t data_len)
 }
 
 /**
- * session_clear_data - Wipes and frees session data securely.
+ * session_clear_data - Securely zeroes and frees session payload data.
  * @session: Pointer to the session instance.
  */
 void session_clear_data(session_t *session)
@@ -60,12 +60,12 @@ void session_clear_data(session_t *session)
 }
 
 /**
- * session_update_data - Updates payload without leaking or corrupting memory.
+ * session_update_data - Updates payload data without leaking or corrupting memory.
  * @session: Pointer to session instance.
  * @data: Pointer to new data buffer.
- * @data_len: Length of new data buffer.
+ * @data_len: Length of new data buffer in bytes.
  *
- * Return: 1 on success, 0 on allocation failure.
+ * Return: 1 on success, 0 on failure.
  */
 int session_update_data(session_t *session, const void *data, size_t data_len)
 {
@@ -94,7 +94,7 @@ int session_update_data(session_t *session, const void *data, size_t data_len)
 }
 
 /**
- * session_destroy - Destroys session, zeroing payload and freeing resources.
+ * session_destroy - Destroys session, zeroing sensitive payload and freeing memory.
  * @session: Pointer to session instance to free.
  */
 void session_destroy(session_t *session)
